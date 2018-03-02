@@ -12,3 +12,6 @@
 
   - name: display username
     debug: msg="Ligged in as user {{login.stdout}}"
+
+  - name: display the ip adress
+    debug: msg={{ ansible_eth0.ipv4.address }}
