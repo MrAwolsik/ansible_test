@@ -1,0 +1,11 @@
+---
+- name: display some vars
+  hosts: all
+
+  tasks:
+  - name: capture outpout of whoami inside the login variable
+    command: whoami
+    register: login
+
+  - name: display login
+    debug: var=login
