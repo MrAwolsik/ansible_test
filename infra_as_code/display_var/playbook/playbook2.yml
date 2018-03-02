@@ -1,6 +1,6 @@
 ---
 - name: display some vars
-  hosts: all
+  hosts: front-vm-1
 
   tasks:
   - name: capture outpout of whoami inside the login variable
@@ -9,3 +9,6 @@
 
   - name: display login
     debug: var=login
+
+  - name: display username
+    debug: msg="Ligged in as user {{login.stdout}}"
