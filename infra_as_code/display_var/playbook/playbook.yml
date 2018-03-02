@@ -1,0 +1,20 @@
+---
+- name: display some vars
+  hosts: all
+  vars:
+    http_port: 80
+    ssh_port: 22
+  vars_files:
+    - playbook_vars/variables.yml
+  become: true
+
+  tasks:
+  - name: display http_port
+    debug: var=http_port
+  - name: display ssh_port
+    debug: var=ssh_port
+  - name: display life
+    debug: var=database.life
+  - name: display https_port
+    debug: var=database.https_port  
+
