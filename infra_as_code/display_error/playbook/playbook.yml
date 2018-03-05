@@ -1,0 +1,15 @@
+---
+- name: Run a command & display error
+  hosts: front-vm-1
+  tasks:
+  - name: Run a none existing command
+    command: /opt/myprog
+    register: result
+    ignore_errors: true
+
+  - name: display error
+    debug: var=result
+
+  - name: stop the process
+    debug: msg="Fail if myprog failed"
+    failed_when: result | failed

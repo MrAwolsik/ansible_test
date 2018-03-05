@@ -1,0 +1,9 @@
+---
+- name: display ip db
+  hosts: front-vm-1
+  tasks:
+  - name: Display hostvars[inventory_hostname]
+    debug: msg="{{hostvars[inventory_hostname]}}"
+
+  - name: Display hostvars[inventory_hostname].ansible_distribution
+    debug: msg="{{hostvars[inventory_hostname].ansible_distribution}}"

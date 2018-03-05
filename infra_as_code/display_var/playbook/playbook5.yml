@@ -1,0 +1,12 @@
+---
+- name: display ip db
+  hosts: front-vm-1
+  vars_prompt:
+    - name: "firstname"
+      prompt: "What is your firstname?"
+    - name: "lastname"
+      prompt: "What is your lastname?"
+  
+  tasks:
+  - name: Display Hello <firstname> <lastname>
+    debug: msg="Hello {{firstname}} {{lastname}}" 

@@ -1,0 +1,10 @@
+---
+- name: GF all
+  hosts: all
+
+- name: display ip db
+  hosts: front-vm-1
+  tasks:
+  - name: Display ip adress of the dbserver
+    debug: msg="{{hostvars['back-vm-1'].ansible_eth0.ipv4.address}}"
+

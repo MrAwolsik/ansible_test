@@ -1,0 +1,7 @@
+---
+- name: display ip db
+  hosts: front-vm-1
+  
+  tasks:
+  - name: Display Hello <firstname> <lastname>
+    debug: msg="Hello {{firstname | default('Jhon') }} {{lastname | default('Doe') }}" 

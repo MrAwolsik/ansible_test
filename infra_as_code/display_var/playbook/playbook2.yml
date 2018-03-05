@@ -15,3 +15,24 @@
 
   - name: display the ip adress
     debug: msg={{ ansible_eth0.ipv4.address }}
+
+  - name: creat local file fact
+    copy:
+        content: ""
+        dest: /etc/ansible/facts.d/conf2.fact
+        force: no
+        group: valentin
+        owner: valentin
+        mode: 0666
+
+  - name: edit new fact file add category
+    lineinfile:
+        path: /etc/ansible/facts.d/conf2.fact
+        line: '[general]'
+        insertbefore: last
+
+  - name: edit new fact file add var
+    lineinfile:
+        path: /etc/ansible/facts.d/conf2.fact
+        line: 'dying=too_bad'
+        insertbefore: last
