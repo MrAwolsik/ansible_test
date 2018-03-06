@@ -13,3 +13,6 @@
   - name: stop the process
     debug: msg="Fail if myprog failed"
     failed_when: result | failed
+
+  - name: don't execute if result failed
+    debug: msg="hidden"
