@@ -1,0 +1,32 @@
+---
+- name: test filters
+  hosts: front-vm-1
+
+  tasks:
+  - name: min
+    debug: msg=" {{ [1, 2, 3, 3, 4, 5, 500, 6, 7, 9] | min }}  "
+
+  - name: max
+    debug: msg=" {{ [1, 2, 3, 3, 4, 5, 500, 6, 7, 9] | max }}  "
+
+  - name: unique
+    debug: msg=" {{ [1, 2, 3, 3, 4, 5, 500, 6, 7, 9] | unique }}  "
+
+  - name: union
+    debug: msg=" {{ [1, 2, 3, 3, 4, 500, 6] | union([5, 7, 9]) }}  "
+
+  - name: intersect
+    debug: msg=" {{ [1, 2, 3, 3, 4, 5, 500, 6, 7, 9] | intersect([5, 7, 9]) }}  "
+
+  - name: dif
+    debug: msg=" {{ [1, 2, 3, 3, 4, 5, 500, 6, 7, 9] | difference([5, 7, 9]) }}  "
+
+  - name: shuffle
+    debug: msg=" {{ [1, 2, 3, 3, 4, 5, 500, 6, 7, 9] | shuffle }}  "
+
+  - name: shuffle
+    debug: msg=" {{ [1, 2, 3, 3, 4, 5, 500, 6, 7, 9] | shuffle }}  "
+
+  - name: shuffle
+    debug: msg=" {{ [1, 2, 3, 3, 4, 5, 500, 6, 7, 9] | shuffle }}  "
+

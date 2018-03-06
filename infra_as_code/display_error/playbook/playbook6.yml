@@ -1,0 +1,9 @@
+---
+- name: parse url
+  hosts: front-vm-1
+  tasks:
+  - debug: msg="{{ 'Ansible is a great Infrastructure as Code solution.' | regex_search('(Infrastructure)') }}"  
+  - debug: msg="{{ 'Ansible is a great Infrastructure as Code solution.' | regex_search('(Chef)') }}"
+  - debug: msg="{{ 'Ansible is a great Infrastructure as Code solution, Ansible is owned by Red Hat' | regex_findall('(Ansible)') }}"
+  - debug: msg="{{ 'foobar' | regex_replace('^f.*o(.*)$', 'I drink a beer in a \\1') }}"
+  - debug: msg="{{ 'localhost 80' | regex_replace('^(?P<host>.+) (?P<port>\\d+)$', 'http://\\g<host>:\\g<port>') }}"

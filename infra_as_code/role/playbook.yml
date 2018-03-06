@@ -1,0 +1,14 @@
+---
+- name: generate ssh keys
+  hosts: localhost
+
+  roles:
+    - sshkeygen
+
+- name: install httpd & add two users
+  hosts: front-vm-1
+  become: true
+
+  roles:
+    - httpd
+    - addusers

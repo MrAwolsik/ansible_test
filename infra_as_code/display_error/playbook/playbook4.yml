@@ -1,0 +1,24 @@
+---
+- name: Hash and filters
+  hosts: front-vm-1
+  vars:
+    path: /var/www/html/work/index.html
+  tasks:
+  - name: hash
+    debug: msg="{{ 'valentin' | hash('sha512') }}"
+
+  - name: checksum
+    debug: msg="{{ 'valentin' | checksum }}"
+
+  - name: password_hash
+    debug: msg="{{ 'valentin' | password_hash('sha512') }}"
+
+  - name: basename
+    debug: msg="{{ path | basename }}"
+
+  - name: dirname
+    debug: msg="{{ path | dirname }}"
+
+  - name: relpath
+    debug: msg="{{ path | relpath }}"
+

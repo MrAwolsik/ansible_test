@@ -1,0 +1,31 @@
+---
+- name: add user with ssh keys
+  hosts: webservers
+  become: true
+  vars:
+    user1: paul
+    user2: alexandre
+
+  tasks:
+  - user:
+      name: "{{user1}}"
+      state: present
+
+  - user:
+      name: "{{user2}}"
+      state: present
+
+  - name: Copy public keys on the remote nodes
+    authorized_key:
+      user: "{{user1}}"
+      state: present
+      key: "{{ item }}"
+    with_file: "./ssh-keys-user1/id_rsa.pub"
+
+  - name: Copy public keys on the remote nodes
+    authorized_key:
+      user: "{{user2}}"
+      state: present
+      key: "{{ item }}"
+    with_file: "./ssh-keys-user2/id_rsa.pub"
+

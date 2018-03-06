@@ -1,0 +1,33 @@
+---
+- name: lookup
+  hosts: front-vm-1
+
+  tasks:
+  - name: lookup file
+    debug: msg="content of tokens.txt is {{ lookup('file', 'tokens.txt') }}"
+    tags: file
+
+  - name: lookup password
+    debug: msg="The generate password is {{ lookup('password', 'tokens.txt') }}"
+    tags: password
+
+  - name: lookup system
+    debug: msg="The shell is {{ lookup('env', 'SHELL') }}"
+    tags: system
+
+  - name: lookup csv
+    debug: msg="The atomic number of Lithium is {{ lookup('csvfile', 'Li file=elements.csv delimiter=,') }}"
+    tags: csv
+
+  - name: lookup ini
+    debug: msg="User in integration is {{ lookup('ini', 'user section=integration file=users.ini') }}"
+    tags: ini
+
+  - name: lookup dns->ip
+    debug: msg="The IPv4 address for google.com. is {{ lookup('dig', 'google.com.')}}"
+    tags: dns
+
+  - name: lookup ip->dns
+    debug: msg="Reverse DNS for 40.118.213.78 is {{ lookup('dig', '40.118.213.78/PTR') }}"
+    tags: ip
+

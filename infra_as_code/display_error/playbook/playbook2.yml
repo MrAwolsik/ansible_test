@@ -1,0 +1,9 @@
+---
+- name: load json file and display it
+  hosts: front-vm-1
+  tasks:
+  - name: save json in result
+    command: cat /etc/ansible/file.json
+    register: result
+  - name: display json
+    debug: msg="{{result.stdout | from_json}}"

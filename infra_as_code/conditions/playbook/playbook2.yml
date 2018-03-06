@@ -1,0 +1,9 @@
+---
+- name: display IPv4 properties
+  hosts: front-vm-1
+
+  tasks:
+  - name: display uptime
+    debug:
+      msg: "{{ item.key }} = {{ item.value }}"
+    with_dict: "{{ ansible_eth0.ipv4 }}"

@@ -1,0 +1,16 @@
+---
+- name: parse url
+  hosts: front-vm-1
+  vars:
+   url: "http://root:azerty@www.google.com:8080/exemple1/index.html?lang=fr#part2"
+  tasks:
+  - debug: msg="{{ url | urlsplit('hostname') }}"
+  - debug: msg="{{ url | urlsplit('netloc') }}"
+  - debug: msg="{{ url | urlsplit('username') }}"
+  - debug: msg="{{ url | urlsplit('password') }}"
+  - debug: msg="{{ url | urlsplit('path') }}"
+  - debug: msg="{{ url | urlsplit('port') }}"
+  - debug: msg="{{ url | urlsplit('scheme') }}"
+  - debug: msg="{{ url | urlsplit('query') }}"
+  - debug: msg="{{ url | urlsplit('fragment') }}"  
+

@@ -1,0 +1,27 @@
+---
+- name: install Apache httpd
+  hosts: webservers
+  become: true
+  vars_prompt:
+    name: uptime
+    prompt: "Display uptime (y/n) ?"
+
+  tasks:
+  - name: update packages for centos distrib
+    yum: name='*' state=latest
+    when:
+      - ansible_distribution == 'CentOS'
+      - ansible_distribution_major_version >= '7'
+
+  - name: update packages for ubuntu distrib
+    apt:
+      upgrade: dist
+    when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+
+  - name: save uptime
+    shell: /usr/bin/uptime
+    register: result
+    when: uptime is defined and uptime == 'y'
+
+  - name: display uptime
+    debug: var=result.stdout
