@@ -1,0 +1,31 @@
+- file:
+    path: /busapps
+    state: directory
+    mode: 0755
+
+- file:
+    path: /busdata
+    state: directory
+    mode: 0755
+
+- file:
+    path: /busapps/dcvt/1.0/
+    state: directory
+    mode: 0755
+    owner: DCVTGBLA
+    group: DCVTGBLA
+
+- file:
+    path: /busdata/dcvt/1.0/data
+    state: directory
+    mode: 0755
+    owner: DCVTGBLA
+    group: DCVTGBLA
+
+- file:
+    path: /busdata/dcvt/1.0/logs
+    state: directory
+    mode: 0755
+    owner: DCVTGBLA
+    group: DCVTGBLA
+

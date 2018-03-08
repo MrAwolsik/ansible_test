@@ -1,0 +1,33 @@
+- name: install mysql rpm from a remote repo
+  yum:
+    name: http://dev.mysql.com/get/mysql57-community-release-el7-7.noarch.rpm
+    state: present
+
+- name: install the latest version of mysql
+  yum:
+    name: mysql-server
+    state: latest
+
+- name: install python-mysqldb
+  yum:
+    name:  MySQL-python
+    state: latest
+
+- service:
+    name: mysqld.service
+    state: started
+    enabled: yes
+
+- name: db_user
+  mysql_user:
+    login_password:
+    name: ipme_login
+    password: 
+    priv: '*.*:ALL'
+    state: present
+
+- name: Create a new database with name 'ipme'
+  mysql_db:
+    name: ipme
+    login_password:
+    state: present

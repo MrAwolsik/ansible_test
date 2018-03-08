@@ -1,0 +1,29 @@
+- name: droit_user
+  command: chown -R DCVTGBLA:DCVTGBLA /busapps/dcvt/1.0/apache-tomcat-8.5.28/
+ 
+- command: chown -R DCVTGBLA:DCVTGBLA /busapps/dcvt/1.0/jdk1.8.0_161/
+
+- name: delete logs from tomcat
+  file:
+    path: /busapps/dcvt/1.0/apache-tomcat-8.5.28/logs
+    state: absent
+
+- name: link logs
+  file:
+    src: /busdata/dcvt/1.0/logs
+    dest: /busapps/dcvt/1.0/apache-tomcat-8.5.28/logs
+    owner: DCVTGBLA
+    group: DCVTGBLA
+    state: link
+
+- copy:
+    src: roles/tomcat/files/tomcat.service
+    dest: /etc/systemd/system/
+    owner: DCVTGBLA
+    group: DCVTGBLA
+    mode: 0644
+
+- service:
+    name: tomcat.service
+    state: started
+    enabled: yes

@@ -1,0 +1,12 @@
+---
+- name: playbook fail
+  hosts: front-vm-1
+  strategy: debug
+  vars:
+    http: apache
+
+
+  tasks:
+  - name: install apache
+    yum: name={{http}} state=latest
+

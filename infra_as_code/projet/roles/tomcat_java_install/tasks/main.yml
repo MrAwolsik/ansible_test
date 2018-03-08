@@ -1,0 +1,24 @@
+- name: download tomcat
+  get_url:
+    url: http://wwwftp.ciril.fr/pub/apache/tomcat/tomcat-8/v8.5.28/bin/apache-tomcat-8.5.28.tar.gz
+    dest: /tmp
+
+- name: Extract foo.tgz into /var/lib/foo
+  unarchive:
+    src: /tmp/apache-tomcat-8.5.28.tar.gz
+    dest: /busapps/dcvt/1.0
+    remote_src: yes
+
+
+- name: download java jdk
+  get_url:
+    url: http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jdk-8u161-linux-x64.tar.gz
+    headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
+    dest: /tmp
+
+- name: unarch java
+  unarchive:
+    src: /tmp/jdk-8u161-linux-x64.tar.gz
+    dest: /busapps/dcvt/1.0
+    remote_src: yes
+

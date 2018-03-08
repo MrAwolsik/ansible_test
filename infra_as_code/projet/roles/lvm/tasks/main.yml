@@ -1,0 +1,91 @@
+- name: create lvg
+  lvg:
+    pvs: /dev/sdc
+    state: present
+    vg: projet
+
+- lvol:
+    vg: projet
+    lv: busapps
+    size: 1024
+    shrink: no
+
+- lvol:
+    vg: projet
+    lv: busdata
+    size: 1024
+    shrink: no
+
+- lvol:
+    vg: projet
+    lv: 1.0
+    size: 1024
+    shrink: no
+
+- lvol:
+    vg: projet
+    lv: data
+    size: 5118
+    shrink: no
+
+- lvol:
+    vg: projet
+    lv: logs
+    size: 2048
+    shrink: no
+
+- filesystem:
+    fstype: ext3
+    dev: /dev/projet/busapps
+
+- filesystem:
+    fstype: ext3
+    dev: /dev/projet/busdata
+
+- filesystem:
+    fstype: ext3
+    dev: /dev/projet/1.0
+
+- filesystem:
+    fstype: ext3
+    dev: /dev/projet/data
+
+- filesystem:
+    fstype: ext3
+    dev: /dev/projet/logs
+
+- name: montage
+  mount:
+    path: /busapps
+    src: /dev/projet/busapps
+    fstype: ext3
+    state: mounted
+
+- mount:
+    path: /busdata
+    src: /dev/projet/busdata
+    fstype: ext3
+    state: mounted
+
+- mount:
+    path: /busapps/dcvt/1.0
+    src: /dev/projet/1.0
+    fstype: ext3
+    state: mounted
+
+- mount:
+    path: /busdata/dcvt/1.0/data
+    src: /dev/projet/data
+    fstype: ext3
+    state: mounted
+
+- mount:
+    path: /busdata/dcvt/1.0/logs
+    src: /dev/projet/logs
+    fstype: ext3
+    state: mounted
+
+- name: chown owner
+  command: chown -R DCVTGBLA:DCVTGBLA /busapps/dcvt/
+
+- command: chown -R DCVTGBLA:DCVTGBLA /busdata/dcvt/

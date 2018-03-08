@@ -1,0 +1,61 @@
+---
+- name: install httpd
+  hosts: webservers
+  become: true
+
+  roles:
+    - httpd
+
+############################################
+
+- name: generate ssh keys
+  hosts: localhost
+  vars:
+    new_user: DCVTGBLA
+    user_db: ipme_login
+
+  roles:
+    - {role: sshkeygen, user: "{{new_user}}"}
+    - {role: sshkeygen, user: "{{user_db}}"}
+
+############################################
+
+- name: create files
+  hosts: webservers
+  become: true
+  vars:
+    new_user: DCVTGBLA
+    user_db: ipme_login
+
+  roles:
+    - {role: addusers, user: "{{new_user}}"}
+    - {role: addusers, user: "{{user_db}}"}
+    - files
+
+############################################
+
+- name: lvm vm2
+  hosts: front-vm-2
+  become: true
+
+  roles:
+    - lvm
+
+############################################
+
+- name: install tomcat
+  hosts: webservers
+  become: true
+
+  roles:
+    - tomcat_java_install
+    - tomcat
+
+############################################
+
+- name: install MySQL
+  hosts: dbservers
+  become: true
+
+  roles:
+    - mysql

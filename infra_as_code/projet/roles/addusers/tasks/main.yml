@@ -1,0 +1,12 @@
+---
+- user:
+    name: "{{ user }}"
+    state: present
+
+- name: Copy public keys on the remote nodes
+  authorized_key:
+    user: "{{ user }}"
+    state: present
+    key: "{{ item }}"
+  with_file: "../files/{{user}}/ssh/id_rsa.pub"
+

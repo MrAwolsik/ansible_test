@@ -1,0 +1,18 @@
+- file:
+    path: roles/addusers/files/{{user}}/ssh
+    state: directory
+    mode: 0755
+
+- name: delete ip_rsa
+  file:
+    path: roles/addusers/files/{{user}}/ssh/id_rsa
+    state: absent
+
+- name: delete ip_rsa.pub
+  file:
+    path: roles/addusers/files/{{user}}/ssh/id_rsa.pub
+    state: absent
+
+- name: ensure SSH key is generated
+  command: ssh-keygen -t rsa -f roles/addusers/files/{{user}}/ssh/id_rsa -N ''
+

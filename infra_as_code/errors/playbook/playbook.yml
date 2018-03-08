@@ -1,0 +1,33 @@
+---
+- name: test errors
+  hosts: front-vm-1
+
+  tasks:
+  - name: ignore
+    command: /bin/false
+    ignore_errors: yes
+
+  - name: ignore_true
+    debug: msg="Le ignore est bien passé"
+
+  - name: check errors
+    command: /my-script -x
+    register: result
+    failed_when: "'FAILED' in result.stderr"
+
+  - name: changed
+    command: /my-script -x
+    register: result
+    changed_when: result.rc == 10
+
+  - name: block ex
+    block:
+     - debug: msg="I execute normally"
+     - command: /bin/false
+     - debug: msg="I never execute"
+    rescue:
+     - debug: msg="I caught an error"
+     - command: /bin/false
+     - debug: msg="I also never execute"
+    always:
+     - debug: msg="This always executes"
